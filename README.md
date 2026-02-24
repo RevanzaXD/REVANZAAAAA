@@ -72,7 +72,7 @@
 ## 📈 Activity Graph
 
 <div align="center">
-  <img src="https://activity-graph.herokuapp.com/graph?username=usernamekamu&theme=react-dark&bg_color=20232a&hide_border=true" width="100%"/>
+  <img src="https://activity-graph.herokuapp.com/graph?RevanzaXD=RevanzaXD&theme=react-dark&bg_color=20232a&hide_border=true" width="100%"/>
 </div>
 
 ## 🐍 Contribution Snake
@@ -84,6 +84,30 @@
     <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/usernamekamu/usernamekamu/output/github-contribution-grid-snake.svg">
   </picture>
 </div>
+name: Generate snake animation
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Platane/snk@v2
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+      - uses: crazy-max/ghaction-github-pages@v2.1.3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ## 📫 Connect With Me
 
